@@ -1,0 +1,71 @@
+/* Estilo para el header */
+header {
+    background-color: #FF6F61; /* Color de fondo naranja */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+/* Estilo para el logo */
+#logo img {
+    max-width: 100px;
+}
+
+/* Estilo para el campo de búsqueda */
+#search input {
+    border: 2px solid #FFD700; /* Borde amarillo */
+    border-radius: 20px;
+    padding: 5px 10px;
+    width: 300px;
+    font-size: 14px;
+}
+
+/* Estilo para los iconos de usuario y carrito */
+#user-cart a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #fff; /* Color de iconos blanco */
+}
+
+/* Estilo para la categoría */
+#categories {
+    position: relative;
+}
+
+#categories span {
+    cursor: pointer;
+}
+
+#categories ul {
+    display: none;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    background-color: #FFD700; /* Fondo amarillo */
+    list-style: none;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#categories ul li {
+    margin-bottom: 5px;
+}
+
+#categories ul a {
+    text-decoration: none;
+    color: #FF6F61; /* Color de texto naranja */
+    font-weight: bold;
+}
+
+/* Cambiar color al hacer hover sobre la categoría */
+#categories:hover ul {
+    display: block;
+}
+
+/* Mantener el menú abierto mientras el cursor esté sobre él */
+#categories ul:hover {
+    display: block;
+}
+
+

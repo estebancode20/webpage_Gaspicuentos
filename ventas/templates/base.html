@@ -1,0 +1,73 @@
+<!--escribir navbar-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    <script src="{% static 'js/menu.js' %}"></script>
+</head>
+<body>
+
+    
+<body>
+    <header>
+        <div id="logo">
+            <img src="tu_logo.png" alt="Logo de la página">
+        </div>
+        <div id="categories">
+            <span>Categoría</span>
+            <ul>
+                <li><a href="#">3D</a></li>
+                <li><a href="#">Busca y encuentra</a></li>
+                <li><a href="#">Cuento + puzzle</a></li>
+                <li><a href="#">Cuentos</a></li>
+                <li><a href="#">Educativo</a></li>
+                <li><a href="#">Historia</a></li>
+                <li><a href="#">Libros con sonido</a></li>
+                <li><a href="#">Libros para pintar</a></li>
+                <li><a href="#">Memorice</a></li>
+                <li><a href="#">Mundicrom educativo</a></li>
+                <li><a href="#">Pop-up</a></li>
+                <li><a href="#">Textura</a></li>
+                <li><a href="#">Álbum de fotos</a></li>
+                <!-- Agrega más categorías según sea necesario -->
+            </ul>
+        </div>
+        <div id="search">
+            <input type="text" placeholder="Buscar por palabra clave/título/autor/ISBN">
+        </div>
+        <div id="user-cart">
+            <a href="{% url 'home' %}">
+                <img src="logo_home.png" alt="Home">
+            </a>
+            <a href="{% url 'iniciar_sesion' %}">
+                <img src="logo_usuario.png" alt="Iniciar Sesión">
+            </a>
+            <a href="carrito_de_compra.html">
+                <img src="carro_de_compra.png" alt="Carro de Compra">
+            </a>
+        </div>
+    </header>
+
+</body>
+
+
+
+    
+</body>
+</html>
+
+
+
+<div id="contenido">
+
+    {% block contenido %}
+    {% endblock %}
+ 
+</div>
+
+
+<!--escribir footer-->
