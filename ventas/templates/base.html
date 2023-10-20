@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     {% load static %}
+    {% block css %}
+    {% endblock %}
+
     <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
     <script src="{% static 'js/menu.js' %}"></script>
 </head>
@@ -15,9 +18,9 @@
 <body>
     <header>
         <div id="logo">
-            <img src="tu_logo.png" alt="Logo de la página">
+            <img src="{% static 'img/gaspicuentos.jpeg'%}" alt="Logo de la página">
         </div>
-        <div id="categories">
+        <div id="categoriesButton">
             <span>Categoría</span>
             <ul>
                 <li><a href="#">3D</a></li>
@@ -46,8 +49,9 @@
             <a href="{% url 'iniciar_sesion' %}">
                 <img src="logo_usuario.png" alt="Iniciar Sesión">
             </a>
+            
             <a href="carrito_de_compra.html">
-                <img src="carro_de_compra.png" alt="Carro de Compra">
+                <img src="{% static 'img/carrito_de_compra.png' %}" alt="Carro de Compra">
             </a>
         </div>
     </header>
@@ -68,6 +72,10 @@
     {% endblock %}
  
 </div>
+
+
+{% block js %}
+{% endblock     %}
 
 
 <!--escribir footer-->
