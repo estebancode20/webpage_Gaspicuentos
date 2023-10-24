@@ -1,7 +1,9 @@
-1. agregar imagenes .png (Logo de la pagina, carro de compra).
+1. implementar carro de compra.
 
-2. arreglar visualizacion lista de categorias.
-
-3. agregar slider y productos al home.html
+3. implementar productos al home.html
 
 4. personalizar iniciar_sesion.html  
+
+5. centrar iconos footer    
+
+6. arreglar carrousel
