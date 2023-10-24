@@ -1,4 +1,3 @@
-<!--escribir navbar-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,13 +7,9 @@
     {% load static %}
     {% block css %}
     {% endblock %}
-
     <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
     <script src="{% static 'js/menu.js' %}"></script>
 </head>
-<body>
-
-    
 <body>
     <header>
         <div id="logo">
@@ -49,33 +44,37 @@
             <a href="{% url 'iniciar_sesion' %}">
                 <img src="logo_usuario.png" alt="Iniciar Sesión">
             </a>
-            
             <a href="carrito_de_compra.html">
                 <img src="{% static 'img/carrito_de_compra.png' %}" alt="Carro de Compra">
             </a>
         </div>
     </header>
 
-</body>
-
-
+    <div id="contenido">
+        {% block contenido %}
+        {% endblock %}
+    </div>
 
     
-</body>
-</html>
 
 
-
-<div id="contenido">
-
-    {% block contenido %}
+    {% block js %}
     {% endblock %}
- 
-</div>
+</body>
 
-
-{% block js %}
-{% endblock     %}
-
-
-<!--escribir footer-->
+<footer>
+    <div class="footer-icons">
+        <div id="logo">
+        <a href="https://www.instagram.com/gaspicuentos/?utm_medium=copy_link" target="_blank">
+            <img src="{% static 'img/instagramicon.png'%}" alt="Instagram">
+        </a>
+        <a href="https://m.facebook.com/p/Gaspicuentos-100076292325881/" target="_blank">
+            <img src="{% static 'img/facebook-icon.png'%}" alt="Facebook">
+        </a>
+        <a href="https://www.tiktok.com/@gaspicuentos" target="_blank">
+            <img src="{% static 'img/tiktok-icon.png'%}" alt="TikTok">
+        </a>
+        </div>
+    </div>
+</footer>
+</html>

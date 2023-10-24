@@ -97,3 +97,35 @@ header {
   }
 
 
+/* Estilos generales del footer */
+/* Estilos generales del footer */
+footer {
+    background-color: #FF6F61; /* Color de fondo naranja */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+/* Centrar los íconos de redes sociales */
+.footer-icons {
+    text-align: center;
+}
+
+/* Estilos de los iconos de redes sociales */
+.footer-icons a {
+    text-decoration: none;
+    margin: 0 15px;
+    display: inline-block;
+}
+
+.footer-icons img {
+    width: 30px;
+    height: 30px;
+    border: 0;
+}
+
+/* Cambiar color de los íconos al pasar el mouse por encima */
+.footer-icons a:hover img {
+    filter: brightness(0.8);
+}
