@@ -11,3 +11,6 @@ def home(request):
 
 def iniciar_sesion(request):
     return render(request,'iniciar_sesion.html')
+
+def crear_cuenta(request):
+    return render(request, 'crear_cuenta.html')

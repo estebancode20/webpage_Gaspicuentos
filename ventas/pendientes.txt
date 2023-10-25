@@ -2,8 +2,8 @@
 
 3. implementar productos al home.html
 
-4. personalizar iniciar_sesion.html  
-
 5. centrar iconos footer    
 
-6. arreglar carrousel
+7. implementar bbdd iniciar_sesion y crear_cuenta 
+
+8. modificar bbdd

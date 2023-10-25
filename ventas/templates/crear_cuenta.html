@@ -11,42 +11,27 @@
 {% block contenido %}
 
 <!-- deberá ir el slider y los productos -->
-<h2>INICIAR SESION.html</h2>
+<h2>estas en el CREAR CUENTA.html</h2>
 <!DOCTYPE html>
 <html>
-
 <head>
     <link rel="stylesheet" type="text/css" href="{% static 'css/iniciar_sesion_cuenta.css' %}">
 </head>
-
 <body>
     <div class="container">
-        <form id="login-form">
-            <h2>INICIAR SESIÓN</h2>
+        <form id="register-form">
+            <h2>CREAR UNA CUENTA</h2>
+            <input type="text" placeholder="nombre" id="name" />
+            <input type="text" placeholder="apellido" id="lastname" />
             <input type="text" placeholder="correo electrónico" id="email" />
             <input type="password" placeholder="contraseña" id="password" />
-            <button type="button" onclick="login()">Iniciar Sesión</button>
-        </form>
-
-        <form id="register-form">
-            <h2>¿ERES NUEVO?</h2>
-            
-            <a href="{% url 'crear_cuenta' %}">
-                <button type="button">Crear Cuenta</button>
-              </a>
-              
-            
-
+            <button type="button" onclick="register()">GUARDAR</button>
         </form>
     </div>
 
-    
 
-    
 </body>
-
 </html>
-
 
 
 {% endblock %}
