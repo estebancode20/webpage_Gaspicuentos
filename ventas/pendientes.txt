@@ -1,9 +1,11 @@
 1. implementar carro de compra.
 
-3. implementar productos al home.html
+2. implementar productos al home.html
 
-5. centrar iconos footer    
+3. bajar footer y separala del contenido   
 
-7. implementar bbdd iniciar_sesion y crear_cuenta 
+4. implementar bbdd iniciar_sesion y crear_cuenta 
 
-8. modificar bbdd
+5. modificar bbdd
+
+6. implementar buscador
