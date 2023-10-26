@@ -14,3 +14,13 @@ def iniciar_sesion(request):
 
 def crear_cuenta(request):
     return render(request, 'crear_cuenta.html')
+
+
+def detalle_libro(request):
+    return render(request, 'detalle_libro.html')
+
+"""
+def detalle_libro(request, libro_id):
+    libro = get_object_or_404(Libro, pk=libro_id)
+    return render(request, 'detalle_libro.html', {'libro': libro})
+"""

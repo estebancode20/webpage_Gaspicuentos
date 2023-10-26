@@ -9,3 +9,13 @@
 5. modificar bbdd
 
 6. implementar buscador
+
+
+
+------------------------------
+Prueba visualizacion de libro 
+1. implementar bbdd mysql
+2. crear modelo libro en models.py
+3. crear def lista_libros en views.py 
+4. actualizar home.html card y paginacion (listar_libro.html)
+5. actualizar detalle_libro.html
