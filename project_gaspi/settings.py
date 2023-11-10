@@ -77,8 +77,8 @@ WSGI_APPLICATION = 'project_gaspi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'example_libro_1',
-        'USER': 'random',
+        'NAME': 'example_libro_3',
+        'USER': 'random3',
         'PASSWORD': '235',
         'HOST': 'localhost',  # O la dirección IP del servidor de la base de datos
         'PORT': '3306',
