@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Libro
@@ -8,7 +9,25 @@ def index(request):
     return HttpResponse("estas en el index de ventas")
 
 def home(request):
-    return render(request, 'home.html')
+    categoria_filtrada = request.GET.get('categoria')
+    
+    if categoria_filtrada:
+        libros_list = Libro.objects.filter(categoria__nombre=categoria_filtrada)
+    else:
+        libros_list = Libro.objects.all()
+
+    # Paginación
+    paginator = Paginator(libros_list, 12)  # Muestra 12 libros por página
+    page = request.GET.get('page')
+
+    try:
+        libros = paginator.page(page)
+    except PageNotAnInteger:
+        libros = paginator.page(1)
+    except EmptyPage:
+        libros = paginator.page(paginator.num_pages)
+
+    return render(request, 'home.html', {'libros': libros, 'categoria_filtrada': categoria_filtrada})
 
 def iniciar_sesion(request):
     return render(request,'iniciar_sesion.html')
