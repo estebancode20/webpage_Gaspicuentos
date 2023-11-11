@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Libro
 
 
 
@@ -17,6 +18,8 @@ def crear_cuenta(request):
 
 
 def detalle_libro(request):
+    libros = Libro.objects.all()
+    print(libros)
     return render(request, 'detalle_libro.html')
 
 """

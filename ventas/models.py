@@ -21,6 +21,6 @@ class Libro(models.Model):
     precio = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
-        return self.titulo
-
+        fila = f"{self.titulo} - Cantidad disponible: {self.cantidad_disponible}"
+        return fila
     
