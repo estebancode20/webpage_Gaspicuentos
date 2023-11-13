@@ -1,0 +1,32 @@
+/* estilos.css */
+
+.formulario_contacto {
+    max-width: 400px;
+    margin: auto;
+}
+
+.formulario_contacto label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.formulario_contacto input,
+.formulario_contacto textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+.button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#tablacontactos {
+    /* Agrega estilos según sea necesario para la tabla de contactos */
+}
