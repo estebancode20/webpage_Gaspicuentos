@@ -2,6 +2,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Libro
+from .forms import ContactoForm 
 
 
 
@@ -46,3 +47,18 @@ def detalle_libro(request, libro_id):
     libro = get_object_or_404(Libro, pk=libro_id)
     return render(request, 'detalle_libro.html', {'libro': libro})
 """
+
+def contacto(request):
+    data = {
+        'form': ContactoForm() 
+    }
+
+    if request.method == 'POST':
+        formulario = ContactoForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            data["mensaje"]="contacto guardado"
+        else:
+            data["form"]=formulario
+
+    return render(request,'contacto.html',data)
