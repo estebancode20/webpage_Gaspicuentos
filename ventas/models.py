@@ -40,7 +40,8 @@ class Contacto(models.Model):
     mensaje = models.TextField()
 
     def __str__(self):
-        return self.nombre
+        fila = f"{self.nombre} + {self.mensaje}"
+        return fila 
     
 
      
