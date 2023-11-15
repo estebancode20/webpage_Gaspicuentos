@@ -23,9 +23,9 @@
     <div class="container">
         <form id="login-form">
             <h2>INICIAR SESIÓN</h2>
-            <input type="text" placeholder="correo electrónico" id="email" />
-            <input type="password" placeholder="contraseña" id="password" />
-            <button type="button" onclick="login()">Iniciar Sesión</button>
+            <a href="{% url 'login' %}">
+                <button type="button">Iniciar Sesión</button>
+              </a>
         </form>
 
         <form id="register-form">
