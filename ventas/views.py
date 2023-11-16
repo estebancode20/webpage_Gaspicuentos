@@ -1,8 +1,10 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .models import Libro
-from .forms import ContactoForm 
+from .forms import ContactoForm, CustomUserCreationForm 
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
 
 
 
@@ -65,5 +67,18 @@ def contacto(request):
 
 
 def registro(request):
-    print('esta llamando a la vista registro')
-    return render(request,'registration/registro.html')
+    data = {
+        'form':CustomUserCreationForm()
+    }
+
+    if request.method == 'POST':
+        formulario = CustomUserCreationForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            user = authenticate(username=formulario.cleaned_data["username"],password=formulario.cleaned_data["password1"])
+            login(request,user)
+            messages.success(request,"Te has registrado correctamente") 
+            return redirect(to="home")
+        data["form"]= formulario
+
+    return render(request,'registration/registro.html',data)
