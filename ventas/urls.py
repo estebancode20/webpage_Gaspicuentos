@@ -9,5 +9,6 @@ urlpatterns =[
     path("iniciar_sesion/",views.iniciar_sesion,name="iniciar_sesion"),
     path("crear_cuenta/", views.crear_cuenta,name = "crear_cuenta"),
     path("detalle_libro/",views.detalle_libro,name="detalle_libro"),
-    path("contacto/",views.contacto,name="contacto")
+    path("contacto/",views.contacto,name="contacto"),
+    path("registro/",views.registro,name="registro")
 ]

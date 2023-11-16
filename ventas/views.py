@@ -62,3 +62,8 @@ def contacto(request):
             data["form"]=formulario
 
     return render(request,'contacto.html',data)
+
+
+def registro(request):
+    print('esta llamando a la vista registro')
+    return render(request,'registration/registro.html')
