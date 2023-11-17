@@ -1,17 +1,19 @@
 {% extends 'base.html' %}
-
 {% load static %}
-{% block contenido %}
 
-<!-- deberá ir el slider y los productos -->
-<h2>estas en el home .html</h2>
+{% block contenido %}
+<!-- Deberá ir el slider y los productos -->
+<h2>Estás en el home.html</h2>
 <div class="container">
     <div class="row">
         {% for libro in libros %}
             <div class="col-md-4">
                 <div class="card">
                     {% if libro.imagen %}
-                        <img src="{{ libro.imagen.url }}" class="card-img-top" alt="{{ libro.titulo }}">
+                        <!-- Enlace al detalle_libro.html con el ISBN como identificador -->
+                        <a href="{% url 'detalle_libro' isbn=libro.ISBN %}">
+                            <img src="{{ libro.imagen.url }}" class="card-img-top" alt="{{ libro.titulo }}">
+                        </a>
                     {% else %}
                         <!-- Si no hay imagen, puedes mostrar una imagen predeterminada o dejarlo en blanco -->
                         <img src="{% static 'tu_ruta_default.jpg' %}" class="card-img-top" alt="{{ libro.titulo }}">
@@ -20,7 +22,8 @@
                         <h5 class="card-title">{{ libro.titulo }}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">{{ libro.autor }}</h6>
                         <p class="card-text">Precio: ${{ libro.precio }}</p>
-                        <a href="#" class="btn btn-primary">Comprar</a>
+                        <!-- Enlace al detalle_libro.html con el ISBN como identificador -->
+                        <a href="{% url 'detalle_libro' isbn=libro.ISBN %}" class="btn btn-primary">Comprar</a>
                     </div>
                 </div>
             </div>
@@ -45,6 +48,5 @@
         {% endif %}
     </span>
 </div>
-
 
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponse
 from .models import Libro
 from .forms import ContactoForm, CustomUserCreationForm 
@@ -38,12 +38,12 @@ def iniciar_sesion(request):
 def crear_cuenta(request):
     return render(request, 'crear_cuenta.html')
 
-
+"""
 def detalle_libro(request):
     libros = Libro.objects.all()
     print(libros)
     return render(request, 'detalle_libro.html')
-
+"""
 """
 def detalle_libro(request, libro_id):
     libro = get_object_or_404(Libro, pk=libro_id)
@@ -82,3 +82,11 @@ def registro(request):
         data["form"]= formulario
 
     return render(request,'registration/registro.html',data)
+
+
+def detalle_libro(request, isbn):
+    # Obtén el objeto del libro según el ISBN
+    libro = get_object_or_404(Libro, ISBN=isbn)
+
+    # Pasa el objeto del libro a la plantilla
+    return render(request, 'detalle_libro.html', {'libro': libro})

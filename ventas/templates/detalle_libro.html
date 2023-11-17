@@ -1,30 +1,27 @@
 {% extends 'base.html' %}
-
 {% load static %}
+
 {% block contenido %}
-<h2>este es el DETALLE LIBRO</h2>
-
 <div class="container">
-    <h2>{{ libro.titulo }}</h2>
-    <img src="{{ libro.imagen.url }}" alt="{{ libro.titulo }}">
-    <p>Descripción: {{ libro.descripcion }}</p>
-    <p>ISBN: {{ libro.isbn }}</p>
-    <p>Precio: ${{ libro.precio }}</p>
-    <form method="post">
-        {% csrf_token %}
-        <label for="cantidad">Cantidad:</label>
-        <input type="number" id="cantidad" name="cantidad" value="1" min="1">
-        <button type="submit">Agregar al carrito</button>
-    </form>
+    <div class="row">
+        <div class="col-md-6">
+            {% if libro.imagen %}
+                <img src="{{ libro.imagen.url }}" class="img-fluid" alt="{{ libro.titulo }}">
+            {% else %}
+                <!-- Si no hay imagen, puedes mostrar una imagen predeterminada o dejarlo en blanco -->
+                <img src="{% static 'tu_ruta_default.jpg' %}" class="img-fluid" alt="{{ libro.titulo }}">
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <h2>{{ libro.titulo }}</h2>
+            <p>Autor: {{ libro.autor }}</p>
+            <p>Editorial: {{ libro.editorial }}</p>
+            <p>ISBN: {{ libro.ISBN }}</p>
+            <p>Cantidad Disponible: {{ libro.cantidad_disponible }}</p>
+            <p>Precio: ${{ libro.precio }}</p>
+            <!-- Puedes agregar más campos según sea necesario -->
+            <a href="#" class="btn btn-primary">Comprar</a>
+        </div>
+    </div>
 </div>
-
-
 {% endblock %}
-
-
-<!--<form method="post" action="{% url 'agregar_al_carrito' libro.id %}">
-        {% csrf_token %}
-        <label for="cantidad">Cantidad:</label>
-        <input type="number" id="cantidad" name="cantidad" value="1" min="1">
-        <button type="submit">Agregar al carrito</button>
-    </form>-->
