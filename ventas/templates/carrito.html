@@ -5,4 +5,11 @@
         <p>{{ item.libro.titulo }} - Cantidad: {{ item.cantidad }} - Precio: ${{ item.precio_total }}</p>
     {% endfor %}
     <p>Total: ${{ total }}</p>
+
+    <!-- Botón de Pagar con Redirección a Transbank -->
+    <form action="URL_DE_TRANSBANK" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="amount" value="{{ total }}">
+        <button type="submit" class="btn btn-primary">Pagar</button>
+    </form>
 </div>
