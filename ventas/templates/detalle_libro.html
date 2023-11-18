@@ -20,7 +20,7 @@
             <p>Cantidad Disponible: {{ libro.cantidad_disponible }}</p>
             <p>Precio: ${{ libro.precio }}</p>
             <!-- Puedes agregar más campos según sea necesario -->
-            <a href="#" class="btn btn-primary">Comprar</a>
+            <a href="{% url 'agregar_al_carrito' isbn=libro.ISBN %}" class="btn btn-primary">Comprar</a>
         </div>
     </div>
 </div>

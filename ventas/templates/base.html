@@ -52,6 +52,12 @@
             <a href="{% url 'contacto' %}">
                 <img src="" alt="Contacto">
             </a>
+            <a href="{% url 'ver_carrito' %}">
+                <img src="{% static 'img/carrito_de_compra.png' %}" alt="Carro de Compra">
+                {% if carrito %}
+                <span>{{ carrito.count }}</span>
+                {% endif %}
+            </a>
             {% if user.is_authenticated %}
             <li>
                 <a href="{% url 'logout' %}">cerrar sesión</a>

@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponse
-from .models import Libro
+from .models import Libro, Carrito
 from .forms import ContactoForm, CustomUserCreationForm 
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -90,3 +90,21 @@ def detalle_libro(request, isbn):
 
     # Pasa el objeto del libro a la plantilla
     return render(request, 'detalle_libro.html', {'libro': libro})
+
+
+def agregar_al_carrito(request, isbn):
+    libro = get_object_or_404(Libro, ISBN=isbn)
+    carrito, created = Carrito.objects.get_or_create(libro=libro, precio_total=libro.precio)
+
+    if not created:
+        carrito.cantidad += 1
+        carrito.precio_total += libro.precio
+        carrito.save()
+
+    return redirect('detalle_libro', isbn=isbn)
+
+
+def ver_carrito(request):
+    carrito = Carrito.objects.all()
+    total = sum(item.precio_total for item in carrito)
+    return render(request, 'carrito.html', {'carrito': carrito, 'total': total})

@@ -10,5 +10,8 @@ urlpatterns =[
     path("crear_cuenta/", views.crear_cuenta,name = "crear_cuenta"),
     path("detalle_libro/<str:isbn>/", views.detalle_libro, name='detalle_libro'),
     path("contacto/",views.contacto,name="contacto"),
-    path("registro/",views.registro,name="registro")
+    path("registro/",views.registro,name="registro"),
+    path('agregar_al_carrito/<str:isbn>/', views.agregar_al_carrito, name='agregar_al_carrito'),
+    path('ver_carrito/', views.ver_carrito, name='ver_carrito'),
+
 ]

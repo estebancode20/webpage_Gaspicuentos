@@ -42,6 +42,12 @@ class Contacto(models.Model):
     def __str__(self):
         fila = f"{self.nombre} + {self.mensaje}"
         return fila 
+
+class Carrito(models.Model):
+    libro = models.ForeignKey(Libro, on_delete=models.CASCADE)
+    cantidad = models.IntegerField(default=1)
+    precio_total = models.DecimalField(max_digits=10, decimal_places=2)
+
     
 
      

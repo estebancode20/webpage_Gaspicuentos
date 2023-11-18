@@ -1,0 +1,8 @@
+<!-- carrito.html -->
+<div>
+    <h3>Carrito de Compra</h3>
+    {% for item in carrito %}
+        <p>{{ item.libro.titulo }} - Cantidad: {{ item.cantidad }} - Precio: ${{ item.precio_total }}</p>
+    {% endfor %}
+    <p>Total: ${{ total }}</p>
+</div>
