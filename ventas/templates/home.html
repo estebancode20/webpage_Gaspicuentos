@@ -2,51 +2,57 @@
 {% load static %}
 
 {% block contenido %}
-<!-- Deberá ir el slider y los productos -->
-<h2>Estás en el home.html</h2>
-<div class="container">
-    <div class="row">
-        {% for libro in libros %}
-            <div class="col-md-4">
-                <div class="card">
-                    {% if libro.imagen %}
-                        <!-- Enlace al detalle_libro.html con el ISBN como identificador -->
-                        <a href="{% url 'detalle_libro' isbn=libro.ISBN %}">
-                            <img src="{{ libro.imagen.url }}" class="card-img-top" alt="{{ libro.titulo }}">
-                        </a>
-                    {% else %}
-                        <!-- Si no hay imagen, puedes mostrar una imagen predeterminada o dejarlo en blanco -->
-                        <img src="{% static 'tu_ruta_default.jpg' %}" class="card-img-top" alt="{{ libro.titulo }}">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ libro.titulo }}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ libro.autor }}</h6>
-                        <p class="card-text">Precio: ${{ libro.precio }}</p>
-                        <!-- Enlace al detalle_libro.html con el ISBN como identificador -->
-                        <a href="{% url 'detalle_libro' isbn=libro.ISBN %}" class="btn btn-primary">Comprar</a>
+    <h2>Estás en el home.html</h2>
+    <div class="container">
+        {% if query %}
+            <div class="search-results">
+                <h2>Resultados de búsqueda para '{{ query }}'</h2>
+                {% for libro in libros %}
+                    <!-- Muestra los resultados de búsqueda -->
+                    {{ libro.titulo }} - {{ libro.autor }} - {{ libro.ISBN }}
+                    <!-- Puedes agregar más detalles según sea necesario -->
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="row">
+            {% for libro in libros %}
+                <div class="col-md-4">
+                    <div class="card">
+                        {% if libro.imagen %}
+                            <a href="{% url 'detalle_libro' isbn=libro.ISBN %}">
+                                <img src="{{ libro.imagen.url }}" class="card-img-top" alt="{{ libro.titulo }}">
+                            </a>
+                        {% else %}
+                            <img src="{% static 'tu_ruta_default.jpg' %}" class="card-img-top" alt="{{ libro.titulo }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ libro.titulo }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ libro.autor }}</h6>
+                            <p class="card-text">Precio: ${{ libro.precio }}</p>
+                            <a href="{% url 'detalle_libro' isbn=libro.ISBN %}" class="btn btn-primary">Comprar</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if libros.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ libros.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Página {{ libros.number }} de {{ libros.paginator.num_pages }}.
+                </span>
+
+                {% if libros.has_next %}
+                    <a href="?page={{ libros.next_page_number }}">next</a>
+                    <a href="?page={{ libros.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
     </div>
-</div>
-
-<div class="pagination">
-    <span class="step-links">
-        {% if libros.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ libros.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Página {{ libros.number }} de {{ libros.paginator.num_pages }}.
-        </span>
-
-        {% if libros.has_next %}
-            <a href="?page={{ libros.next_page_number }}">next</a>
-            <a href="?page={{ libros.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
-</div>
-
 {% endblock %}

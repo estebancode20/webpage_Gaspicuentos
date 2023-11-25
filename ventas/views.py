@@ -5,6 +5,7 @@ from .models import Libro, Carrito
 from .forms import ContactoForm, CustomUserCreationForm 
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from django.db.models import Q
 
 
 
@@ -13,11 +14,19 @@ def index(request):
 
 def home(request):
     categoria_filtrada = request.GET.get('categoria')
-    
+    query = request.GET.get('q')
+
     if categoria_filtrada:
         libros_list = Libro.objects.filter(categoria__nombre=categoria_filtrada)
     else:
         libros_list = Libro.objects.all()
+
+    if query:
+        libros_list = libros_list.filter(
+            Q(titulo__icontains=query) |
+            Q(autor__icontains=query) |
+            Q(ISBN__icontains=query)
+        )
 
     # Paginación
     paginator = Paginator(libros_list, 12)  # Muestra 12 libros por página
@@ -30,7 +39,7 @@ def home(request):
     except EmptyPage:
         libros = paginator.page(paginator.num_pages)
 
-    return render(request, 'home.html', {'libros': libros, 'categoria_filtrada': categoria_filtrada})
+    return render(request, 'home.html', {'libros': libros, 'categoria_filtrada': categoria_filtrada, 'query': query})
 
 def iniciar_sesion(request):
     return render(request,'iniciar_sesion.html')

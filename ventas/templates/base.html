@@ -39,8 +39,12 @@
             </ul>
         </div>
         <div id="search">
-            <input type="text" placeholder="Buscar por palabra clave/título/autor/ISBN">
+            <form method="get" action="{% url 'home' %}">
+                <input type="text" name="q" placeholder="Buscar por palabra clave/título/autor/ISBN">
+                <button type="submit">Buscar</button>
+            </form>
         </div>
+        
         <div id="user-cart">
             <a href="{% url 'home' %}">
                 <img src="logo_home.png" alt="Home">
