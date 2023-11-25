@@ -14,7 +14,7 @@ def pagar_send(request):
     "buy_order": "ordenCompra12345678",
     "session_id": "sesion1234564",
     "amount": request.GET["valor"],
-    "return_url": "http://localhost:9010/ventas/boleta"
+    "return_url": "http://127.0.0.1:8000/ventas/boleta"
     }
     headers = {'Content-Type': 'application/json'
           ,'Tbk-Api-Key-Secret': '579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C'
