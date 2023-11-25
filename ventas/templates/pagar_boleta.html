@@ -1,1 +1,29 @@
-<h2>esta es la boleta</h2>
+<!-- pagar_boleta.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block contenido %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagar Boleta</title>
+</head>
+<body>
+    <h1>Detalles de la Transacción</h1>
+    <p>VCI: {{ vci }}</p>
+    <p>Monto: {{ data.amount }}</p>
+    <p>Estado: {{ data.status }}</p>
+    <p>Orden: {{ data.buy_order }}</p>
+    <p>ID de Sesión: {{ data.session_id }}</p>
+    <p>Tarjeta: {{ data.card_detail.card_number }}</p>
+    <p>Fecha: {{ data.accounting_date }}</p>
+    <p>Fecha de Transacción: {{ data.transaction_date }}</p>
+    <p>Autorización: {{ data.authorization_code }}</p>
+    <p>Código de Pago: {{ data.payment_type_code }}</p>
+    <p>Código de Respuesta: {{ data.response_code }}</p>
+    <p>Plazos: {{ data.installments_number }}</p>
+</body>
+</html>
+
+{% endblock %}
