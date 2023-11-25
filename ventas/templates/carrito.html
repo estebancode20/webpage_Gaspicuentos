@@ -7,9 +7,9 @@
     <p>Total: ${{ total }}</p>
 
     <!-- Botón de Pagar con Redirección a Transbank -->
-    <form action="URL_DE_TRANSBANK" method="post">
-        {% csrf_token %}
-        <input type="hidden" name="amount" value="{{ total }}">
-        <button type="submit" class="btn btn-primary">Pagar</button>
+    
+    <form  action="/ventas/webpay_send" method='GET'>
+        <input  name="valor" type="text" value="{{ total }}"/>
+        <input  type="submit" value="Pagar" />
     </form>
 </div>

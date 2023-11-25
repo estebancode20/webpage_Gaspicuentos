@@ -1,6 +1,7 @@
 from django.urls import path
 
 from . import views
+from . import views_webpay  
 
 
 urlpatterns =[
@@ -13,5 +14,8 @@ urlpatterns =[
     path("registro/",views.registro,name="registro"),
     path('agregar_al_carrito/<str:isbn>/', views.agregar_al_carrito, name='agregar_al_carrito'),
     path('ver_carrito/', views.ver_carrito, name='ver_carrito'),
+    path('webpay', views_webpay.pagar),
+    path('webpay_send', views_webpay.pagar_send),
+    path('boleta', views_webpay.pagar_boleta),
 
 ]
