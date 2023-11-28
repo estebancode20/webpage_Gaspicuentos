@@ -4,25 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de usuario</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
     
-    <div class="conteiner">
+    <div class="container mt-5">
 
         <div class="row">
             <div class="col-12 col-md-6 offset-md-3">
                 <div class="card">
                     <div class="card-body">
-                        <h2>Registro de usuario</h2>
+                        <h2 class="text-center" >Registro de usuario</h2>
                         <hr>
                         <form action="" method="post">
                             {% csrf_token %}
-                            {{ form }}
+                            <div class="form-group">
+                                {{ form.username.label_tag }}
+                                {{ form.username }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.email.label_tag }}
+                                {{ form.email }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.password1.label_tag }}
+                                {{ form.password1 }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.password2.label_tag }}
+                                {{ form.password2 }}
+                            </div>
                             <a href="{% url 'home' %}">Ir al home</a>
                             <a href="{% url 'login' %}">Iniciar sesion</a>
-                            <input type="submit" value="registrar">
+                            <input type="submit" value="registrar" class="btn btn-primary btn-block">
                         </form>
-                    </div>
+                        
                 </div>             
             </div>
         </div> 
