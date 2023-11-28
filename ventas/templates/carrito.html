@@ -1,15 +1,35 @@
-<!-- carrito.html -->
-<div>
-    <h3>Carrito de Compra</h3>
-    {% for item in carrito %}
-        <p>{{ item.libro.titulo }} - Cantidad: {{ item.cantidad }} - Precio: ${{ item.precio_total }}</p>
-    {% endfor %}
-    <p>Total: ${{ total }}</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Tu Tienda</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h3 class="mb-4 p-3 bg-primary text-white">Carrito de Compra</h3>
+        {% for item in carrito %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.libro.titulo }}</h5>
+                    <p class="card-text">Cantidad: {{ item.cantidad }}</p>
+                    <p class="card-text">Precio: ${{ item.precio_total }}</p>
+                </div>
+            </div>
+        {% endfor %}
+        <p>Total: ${{ total }}</p>
 
-    <!-- Botón de Pagar con Redirección a Transbank -->
-    
-    <form  action="/ventas/webpay_send" method='GET'>
-        <input  name="valor" type="text" value="{{ total }}"/>
-        <input  type="submit" value="Pagar" />
-    </form>
-</div>
+        <!-- Botón de Pagar con Redirección a Transbank -->
+        <form action="/ventas/webpay_send" method="GET" class="mt-3">
+            <input name="valor" type="hidden" value="{{ total }}" />
+            <button type="submit" class="btn btn-primary">Pagar</button>
+        </form>
+    </div>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
