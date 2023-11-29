@@ -103,11 +103,11 @@ def detalle_libro(request, isbn):
 
 def agregar_al_carrito(request, isbn):
     libro = get_object_or_404(Libro, ISBN=isbn)
-    carrito, created = Carrito.objects.get_or_create(libro=libro, precio_total=libro.precio)
+    carrito, created = Carrito.objects.get_or_create(libro=libro, precio_total=libro.precio_venta)
 
     if not created:
         carrito.cantidad += 1
-        carrito.precio_total += libro.precio
+        carrito.precio_total += libro.precio_venta
         carrito.save()
 
     return redirect('detalle_libro', isbn=isbn)

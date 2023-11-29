@@ -29,7 +29,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ libro.titulo }}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">{{ libro.autor }}</h6>
-                            <p class="card-text">Precio: ${{ libro.precio }}</p>
+                            <p class="card-text">Precio: ${{ libro.precio_venta }}</p>
                             <a href="{% url 'detalle_libro' isbn=libro.ISBN %}" class="btn btn-primary">Comprar</a>
                         </div>
                     </div>
