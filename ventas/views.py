@@ -16,15 +16,15 @@ def home(request):
     categoria_filtrada = request.GET.get('categoria')
     query = request.GET.get('q')
 
+    libros_list = Libro.objects.all()
+
     if categoria_filtrada:
-        libros_list = Libro.objects.filter(categoria__nombre=categoria_filtrada)
-    else:
-        libros_list = Libro.objects.all()
+        libros_list = libros_list.filter(categoria__nombre=categoria_filtrada)
 
     if query:
         libros_list = libros_list.filter(
             Q(titulo__icontains=query) |
-            Q(autor__icontains=query) |
+            Q(autor__nombre__icontains=query) |  # Cambiado a buscar en el campo 'nombre' de 'Autor'
             Q(ISBN__icontains=query)
         )
 
@@ -40,6 +40,10 @@ def home(request):
         libros = paginator.page(paginator.num_pages)
 
     return render(request, 'home.html', {'libros': libros, 'categoria_filtrada': categoria_filtrada, 'query': query})
+
+
+
+
 
 def iniciar_sesion(request):
     return render(request,'iniciar_sesion.html')

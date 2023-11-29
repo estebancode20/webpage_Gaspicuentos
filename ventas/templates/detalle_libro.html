@@ -18,7 +18,8 @@
             <p>Editorial: {{ libro.editorial }}</p>
             <p>ISBN: {{ libro.ISBN }}</p>
             <p>Cantidad Disponible: {{ libro.cantidad_disponible }}</p>
-            <p>Precio: ${{ libro.precio }}</p>
+            <p>Precio: ${{ libro.precio_venta }}</p>
+            <p>Descripcion: {{ libro.descripcion }}</p>
             <!-- Puedes agregar más campos según sea necesario -->
             <a href="{% url 'agregar_al_carrito' isbn=libro.ISBN %}" class="btn btn-primary">Comprar</a>
         </div>

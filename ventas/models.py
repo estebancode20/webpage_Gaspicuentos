@@ -36,6 +36,7 @@ class Libro(models.Model):
     cantidad_disponible = models.IntegerField(null=True, blank=True)
     precio_compra = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     precio_venta = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    descripcion = models.TextField(null=True, blank=True)
 
     def __str__(self):
         fila = f"{self.titulo} - Cantidad disponible: {self.cantidad_disponible}"
