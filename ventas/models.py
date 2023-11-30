@@ -1,5 +1,7 @@
 import uuid
 from django.db import models
+from django.contrib.auth.models import User
+
 
 class Categoria(models.Model):
     categoria_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -61,12 +63,26 @@ class Contacto(models.Model):
         fila = f"{self.nombre} + {self.mensaje}"
         return fila 
 
+# models.py
+
 class Carrito(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, default=1)  # Cambia 1 por el ID de un usuario existente
     libro = models.ForeignKey(Libro, on_delete=models.CASCADE)
     cantidad = models.IntegerField(default=1)
     precio_total = models.DecimalField(max_digits=10, decimal_places=2)
-
     
+# models.py
+
+class Compra(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    fecha_compra = models.DateTimeField(auto_now_add=True)
+
+class DetalleCompra(models.Model):
+    compra = models.ForeignKey(Compra, on_delete=models.CASCADE)
+    libro = models.ForeignKey(Libro, on_delete=models.CASCADE)
+    cantidad = models.IntegerField()
+    precio_unitario = models.DecimalField(max_digits=10, decimal_places=2)
+    precio_total = models.DecimalField(max_digits=10, decimal_places=2)
 
      
     

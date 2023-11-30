@@ -6,6 +6,7 @@ from .forms import ContactoForm, CustomUserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -105,9 +106,12 @@ def detalle_libro(request, isbn):
     return render(request, 'detalle_libro.html', {'libro': libro})
 
 
+@login_required
 def agregar_al_carrito(request, isbn):
+    usuario = request.user
     libro = get_object_or_404(Libro, ISBN=isbn)
-    carrito, created = Carrito.objects.get_or_create(libro=libro, precio_total=libro.precio_venta)
+
+    carrito, created = Carrito.objects.get_or_create(usuario=usuario, libro=libro, precio_total=libro.precio_venta)
 
     if not created:
         carrito.cantidad += 1
@@ -117,7 +121,22 @@ def agregar_al_carrito(request, isbn):
     return redirect('detalle_libro', isbn=isbn)
 
 
+# views.py
+
+@login_required
+def eliminar_del_carrito(request, carrito_id):
+    Carrito.objects.filter(id=carrito_id).delete()
+    return redirect('ver_carrito')
+
+
+# views.py
+
+@login_required
 def ver_carrito(request):
-    carrito = Carrito.objects.all()
+    usuario = request.user
+    carrito = Carrito.objects.filter(usuario=usuario)
     total = sum(item.precio_total for item in carrito)
     return render(request, 'carrito.html', {'carrito': carrito, 'total': total})
+
+
+
