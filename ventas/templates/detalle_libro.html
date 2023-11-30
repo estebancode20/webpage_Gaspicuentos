@@ -21,7 +21,7 @@
             <p>Precio: ${{ libro.precio_venta }}</p>
             <p>Descripcion: {{ libro.descripcion }}</p>
             <!-- Puedes agregar más campos según sea necesario -->
-            <a href="{% url 'agregar_al_carrito' isbn=libro.ISBN %}" class="btn btn-primary">Comprar</a>
+            <a href="{% url 'agregar_al_carrito' isbn=libro.ISBN %}" class="btn btn-primary">Agregar al Carro</a>
         </div>
     </div>
 </div>
