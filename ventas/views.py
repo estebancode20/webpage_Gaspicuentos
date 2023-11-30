@@ -125,7 +125,8 @@ def agregar_al_carrito(request, isbn):
 
 @login_required
 def eliminar_del_carrito(request, carrito_id):
-    Carrito.objects.filter(id=carrito_id).delete()
+    carrito_item = get_object_or_404(Carrito, id=carrito_id)
+    carrito_item.delete()
     return redirect('ver_carrito')
 
 
