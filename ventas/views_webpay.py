@@ -60,6 +60,6 @@ def pagar_boleta(request):
     print("installments         :",resWP["installments_number"])
     #x = json.loads(resWP, object_hook=lambda d: SimpleNamespace(**d))
     #print("x",x)
-    return render(request,"pagar_boleta.html",{"vci":resWP["vci"]
+    return render(request,"boleta.html",{"vci":resWP["vci"]
                                   ,"data":resWP})
 
