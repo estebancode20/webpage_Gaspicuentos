@@ -6,6 +6,8 @@ from .models import Compra, DetalleCompra, Libro
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 from io import BytesIO
+from django.conf import settings
+
 
 def pagar(request):
     return render(request, "carrito.html")
@@ -104,7 +106,8 @@ def generar_pdf(request):
         'card_detail': request.POST.get('card_detail'),
         'accounting_date': request.POST.get('accounting_date'),
         'transaction_date': request.POST.get('transaction_date'),
-        'detalles_compra': []  # Agregar detalles de la compra en este diccionario
+        'detalles_compra': [],  # Agregar detalles de la compra en este diccionario
+        'logo_url': request.build_absolute_uri(settings.STATIC_URL + 'img/gaspicuentos.jpeg'),  # Ruta absoluta de la imagen
     }
 
     # Agregar detalles de la compra al contexto
