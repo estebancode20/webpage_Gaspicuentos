@@ -61,15 +61,21 @@ def pagar_boleta(request):
 
     # Guardar los datos de la compra en las tablas Compra y DetalleCompra
     compra = Compra.objects.create(usuario=request.user)
+    detalles_compra = []
     for item in request.user.carrito_set.all():
-        DetalleCompra.objects.create(
+        detalle = DetalleCompra.objects.create(
             compra=compra,
             libro=item.libro,
             cantidad=item.cantidad,
             precio_unitario=item.libro.precio_venta,
             precio_total=item.precio_total
         )
+        detalles_compra.append(detalle)
+
     # Limpiar el carrito del usuario después de completar la compra
     request.user.carrito_set.all().delete()
 
-    return render(request, "boleta.html", {"vci": resWP["vci"], "data": resWP})
+    # Incluir información de la compra y sus detalles en el diccionario de contexto
+    context = {"vci": resWP["vci"], "data": resWP, "detalles_compra": detalles_compra}
+
+    return render(request, "boleta.html", context)

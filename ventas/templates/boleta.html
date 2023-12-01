@@ -19,6 +19,12 @@
     <p>Tarjeta: {{ data.card_detail.card_number }}</p>
     <p>Fecha: {{ data.accounting_date }}</p>
     <p>Fecha de Transacción: {{ data.transaction_date }}</p>
+    <h2>Detalle de la Compra</h2>
+<ul>
+    {% for detalle in detalles_compra %}
+        <li>{{ detalle.libro.titulo }} - Cantidad: {{ detalle.cantidad }} - Precio Unitario: {{ detalle.precio_unitario }} - Precio Total: {{ detalle.precio_total }}</li>
+    {% endfor %}
+</ul>
 
 </body>
 </html>
