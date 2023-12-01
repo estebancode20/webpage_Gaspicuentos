@@ -118,8 +118,10 @@ def agregar_al_carrito(request, isbn):
         carrito.precio_total += libro.precio_venta
         carrito.save()
 
-    return redirect('detalle_libro', isbn=isbn)
+    # Agrega un mensaje de éxito
+    messages.success(request, f'El libro "{libro.titulo}" ha sido agregado al carrito.')
 
+    return redirect('detalle_libro', isbn=isbn)
 
 # views.py
 
