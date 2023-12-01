@@ -66,7 +66,7 @@ class Contacto(models.Model):
 # models.py
 
 class Carrito(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE, default=1)  # Cambia 1 por el ID de un usuario existente
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)  # Cambia 1 por el ID de un usuario existente
     libro = models.ForeignKey(Libro, on_delete=models.CASCADE)
     cantidad = models.IntegerField(default=1)
     precio_total = models.DecimalField(max_digits=10, decimal_places=2)

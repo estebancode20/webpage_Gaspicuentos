@@ -111,7 +111,8 @@ def agregar_al_carrito(request, isbn):
     usuario = request.user
     libro = get_object_or_404(Libro, ISBN=isbn)
 
-    carrito, created = Carrito.objects.get_or_create(usuario=usuario, libro=libro, precio_total=libro.precio_venta)
+    # Busca el carrito existente para el usuario y el libro
+    carrito, created = Carrito.objects.get_or_create(usuario=usuario, libro=libro, defaults={'precio_total': libro.precio_venta})
 
     if not created:
         carrito.cantidad += 1
@@ -122,6 +123,7 @@ def agregar_al_carrito(request, isbn):
     messages.success(request, f'El libro "{libro.titulo}" ha sido agregado al carrito.')
 
     return redirect('detalle_libro', isbn=isbn)
+
 
 # views.py
 
