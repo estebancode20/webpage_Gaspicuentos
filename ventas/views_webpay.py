@@ -86,6 +86,15 @@ def pagar_boleta(request):
 
 def generar_pdf(request):
     template_path = 'boleta_pdf.html'
+
+    # Obtener la compra asociada al usuario actual
+    compra = Compra.objects.filter(usuario=request.user).last()
+
+    if not compra:
+        return HttpResponse('No se encontró la compra asociada al usuario', status=404)
+
+    detalles_compra = DetalleCompra.objects.filter(compra=compra)
+
     context = {
         'vci': request.POST.get('vci'),
         'amount': request.POST.get('amount'),
@@ -95,8 +104,17 @@ def generar_pdf(request):
         'card_detail': request.POST.get('card_detail'),
         'accounting_date': request.POST.get('accounting_date'),
         'transaction_date': request.POST.get('transaction_date'),
-        # Agrega más variables de contexto según tus necesidades
+        'detalles_compra': []  # Agregar detalles de la compra en este diccionario
     }
+
+    # Agregar detalles de la compra al contexto
+    for detalle in detalles_compra:
+        context['detalles_compra'].append({
+            'titulo': detalle.libro.titulo,
+            'cantidad': detalle.cantidad,
+            'precio_unitario': detalle.precio_unitario,
+            'precio_total': detalle.precio_total,
+        })
 
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'filename="boleta.pdf"'

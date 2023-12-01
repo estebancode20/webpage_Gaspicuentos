@@ -15,6 +15,12 @@
     <p>card_detail: {{ card_detail }}</p>
     <p>accounting_date: {{ accounting_date }}</p>
     <p>transaction_date: {{ transaction_date }}</p>
-    <!-- Agrega más campos según tus necesidades -->
+
+    <h2>Detalle de la Compra</h2>
+    <ul>
+        {% for detalle in detalles_compra %}
+            <li>{{ detalle.titulo }} - Cantidad: {{ detalle.cantidad }} - Precio Unitario: {{ detalle.precio_unitario }} - Precio Total: {{ detalle.precio_total }}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
