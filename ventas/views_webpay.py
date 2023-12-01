@@ -90,6 +90,11 @@ def generar_pdf(request):
         'vci': request.POST.get('vci'),
         'amount': request.POST.get('amount'),
         'status': request.POST.get('status'),
+        'buy_order': request.POST.get('buy_order'),
+        'session_id': request.POST.get('session_id'),
+        'card_detail': request.POST.get('card_detail'),
+        'accounting_date': request.POST.get('accounting_date'),
+        'transaction_date': request.POST.get('transaction_date'),
         # Agrega más variables de contexto según tus necesidades
     }
 
