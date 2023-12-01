@@ -3,6 +3,9 @@ from django.http import HttpResponse
 import requests
 import json
 from .models import Compra, DetalleCompra, Libro
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from io import BytesIO
 
 def pagar(request):
     return render(request, "carrito.html")
@@ -79,3 +82,25 @@ def pagar_boleta(request):
     context = {"vci": resWP["vci"], "data": resWP, "detalles_compra": detalles_compra}
 
     return render(request, "boleta.html", context)
+
+
+def generar_pdf(request):
+    template_path = 'boleta_pdf.html'
+    context = {
+        'vci': request.POST.get('vci'),
+        'amount': request.POST.get('amount'),
+        'status': request.POST.get('status'),
+        # Agrega más variables de contexto según tus necesidades
+    }
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="boleta.pdf"'
+
+    template = get_template(template_path)
+    html = template.render(context)
+
+    pisa_status = pisa.CreatePDF(html, dest=response)
+
+    if pisa_status.err:
+        return HttpResponse('Error al generar el PDF', status=500)
+    return response

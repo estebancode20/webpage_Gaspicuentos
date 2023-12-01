@@ -1,4 +1,3 @@
-<!-- pagar_boleta.html -->
 {% extends 'base.html' %}
 {% load static %}
 {% block contenido %}
@@ -20,11 +19,21 @@
     <p>Fecha: {{ data.accounting_date }}</p>
     <p>Fecha de Transacción: {{ data.transaction_date }}</p>
     <h2>Detalle de la Compra</h2>
-<ul>
-    {% for detalle in detalles_compra %}
-        <li>{{ detalle.libro.titulo }} - Cantidad: {{ detalle.cantidad }} - Precio Unitario: {{ detalle.precio_unitario }} - Precio Total: {{ detalle.precio_total }}</li>
-    {% endfor %}
-</ul>
+    <ul>
+        {% for detalle in detalles_compra %}
+            <li>{{ detalle.libro.titulo }} - Cantidad: {{ detalle.cantidad }} - Precio Unitario: {{ detalle.precio_unitario }} - Precio Total: {{ detalle.precio_total }}</li>
+        {% endfor %}
+    </ul>
+
+    <form action="{% url 'generar_pdf' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="vci" value="{{ vci }}">
+        <input type="hidden" name="amount" value="{{ data.amount }}">
+        <input type="hidden" name="status" value="{{ data.status }}">
+        <!-- Agrega más campos ocultos según tus necesidades -->
+
+        <button type="submit">Generar PDF</button>
+    </form>
 
 </body>
 </html>
