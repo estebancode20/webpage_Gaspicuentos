@@ -74,10 +74,12 @@ class Carrito(models.Model):
 # models.py
 
 class Compra(models.Model):
+    compra_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     fecha_compra = models.DateTimeField(auto_now_add=True)
 
 class DetalleCompra(models.Model):
+    detalle_compra_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     compra = models.ForeignKey(Compra, on_delete=models.CASCADE)
     libro = models.ForeignKey(Libro, on_delete=models.CASCADE)
     cantidad = models.IntegerField()
