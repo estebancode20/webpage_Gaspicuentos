@@ -173,6 +173,9 @@ def dashboard(request):
 from django.shortcuts import render
 from .models import Libro
 from django.db import connection
+import matplotlib.pyplot as plt
+import io
+import base64
 
 from django.contrib.auth.decorators import user_passes_test
 
@@ -202,7 +205,29 @@ def libros_mas_vendidos(request):
         ''')
         libros_vendidos = cursor.fetchall()
 
-    return render(request, 'libros_mas_vendidos.html', {'libros_vendidos': libros_vendidos})
+        # Calcular la utilidad acumulada total
+        utilidad_acumulada_total = sum(libro[3] for libro in libros_vendidos)
+
+    # Crear el gráfico circular
+    plt.figure(figsize=(6, 6))
+    labels = [libro[1] for libro in libros_vendidos]
+    sizes = [libro[3] / utilidad_acumulada_total * 100 for libro in libros_vendidos]
+    plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=140)
+    plt.title('Utilidad Acumulada por Libro')
+
+    # Convertir el gráfico a imagen y codificarla en base64
+    buffer = io.BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+    image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+
+    # Pasar la imagen codificada a la plantilla
+    return render(
+        request,
+        'libros_mas_vendidos.html',
+        {'libros_vendidos': libros_vendidos, 'image_base64': image_base64}
+    )
+
 
 
 
