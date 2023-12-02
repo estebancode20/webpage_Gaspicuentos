@@ -20,5 +20,6 @@ urlpatterns =[
     path('eliminar_del_carrito/<int:carrito_id>/', views.eliminar_del_carrito, name='eliminar_del_carrito'),
     path('generar_pdf/', views_webpay.generar_pdf, name='generar_pdf'),
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('libros-mas-vendidos/', views.libros_mas_vendidos, name='libros_mas_vendidos'),
 
 ]

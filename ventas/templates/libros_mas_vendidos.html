@@ -1,0 +1,6 @@
+<h2>Top 5 Libros Más Vendidos</h2>
+<ul>
+    {% for libro in libros_vendidos %}
+        <li>{{ libro.1 }} - Total Vendido: {{ libro.2 }}</li>
+    {% endfor %}
+</ul>

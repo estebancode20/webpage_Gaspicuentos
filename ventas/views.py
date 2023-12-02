@@ -9,6 +9,8 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.db.models import Avg
 from ventas import models
+from django.db.models import Sum
+from django.db import connection
 
 
 
@@ -165,3 +167,28 @@ def dashboard(request):
         'fechas_mas_vendidas': fechas_mas_vendidas,
     }
     return render(request, 'dashboard.html', context)
+
+
+# views.py
+from django.shortcuts import render
+from .models import Libro
+from django.db import connection
+
+def libros_mas_vendidos(request):
+    with connection.cursor() as cursor:
+        cursor.execute('''
+            SELECT ISBN, titulo, SUM(cantidad) as total_vendido
+            FROM ventas_detallecompra
+            JOIN ventas_libro ON ventas_detallecompra.libro_id = ventas_libro.ISBN
+            GROUP BY ISBN, titulo
+            ORDER BY total_vendido DESC
+            LIMIT 5;
+        ''')
+        libros_vendidos = cursor.fetchall()
+    
+    return render(request, 'libros_mas_vendidos.html', {'libros_vendidos': libros_vendidos})
+
+
+
+
+
