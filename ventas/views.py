@@ -177,16 +177,27 @@ from django.db import connection
 def libros_mas_vendidos(request):
     with connection.cursor() as cursor:
         cursor.execute('''
-            SELECT ISBN, titulo, SUM(cantidad) as total_vendido
+            SELECT 
+                ventas_libro.ISBN, 
+                ventas_libro.titulo, 
+                SUM(ventas_detallecompra.cantidad) as total_vendido,
+                (SELECT SUM(ventas_detallecompra.cantidad * (ventas_libro.precio_venta - ventas_libro.precio_compra))
+                 FROM ventas_detallecompra
+                 WHERE ventas_detallecompra.libro_id = ventas_libro.ISBN
+                 GROUP BY ventas_detallecompra.libro_id
+                 ORDER BY SUM(ventas_detallecompra.cantidad) DESC
+                 LIMIT 1) as utilidad_acumulada
             FROM ventas_detallecompra
             JOIN ventas_libro ON ventas_detallecompra.libro_id = ventas_libro.ISBN
-            GROUP BY ISBN, titulo
+            GROUP BY ventas_libro.ISBN, ventas_libro.titulo
             ORDER BY total_vendido DESC
             LIMIT 5;
         ''')
         libros_vendidos = cursor.fetchall()
-    
+
     return render(request, 'libros_mas_vendidos.html', {'libros_vendidos': libros_vendidos})
+
+
 
 
 

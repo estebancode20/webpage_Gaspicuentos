@@ -1,6 +1,6 @@
 <h2>Top 5 Libros Más Vendidos</h2>
 <ul>
     {% for libro in libros_vendidos %}
-        <li>{{ libro.1 }} - Total Vendido: {{ libro.2 }}</li>
+        <li>{{ libro.1 }} - Total Vendido: {{ libro.2 }} - Utilidad Acumulada: {{ libro.3 }}</li>
     {% endfor %}
 </ul>
