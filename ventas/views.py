@@ -174,7 +174,14 @@ from django.shortcuts import render
 from .models import Libro
 from django.db import connection
 
+from django.contrib.auth.decorators import user_passes_test
+
+def es_administrador(user):
+    return user.is_authenticated and user.is_staff
+
+@user_passes_test(es_administrador)
 def libros_mas_vendidos(request):
+    # Tu código actual aquí
     with connection.cursor() as cursor:
         cursor.execute('''
             SELECT 
@@ -196,7 +203,6 @@ def libros_mas_vendidos(request):
         libros_vendidos = cursor.fetchall()
 
     return render(request, 'libros_mas_vendidos.html', {'libros_vendidos': libros_vendidos})
-
 
 
 
