@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <title>Tu Título</title>
+</head>
+<body>
+
+
+
+<div class="container mt-5">
+    <h2 class="mb-4">Dashboard Gaspicuentos</h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card bg-light mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Precio Compra Promedio</h5>
+                    <p class="card-text">{{ precio_compra_promedio }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card bg-light mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Precio Venta Promedio</h5>
+                    <p class="card-text">{{ precio_venta_promedio }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card bg-light mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Libros Más Vendidos</h5>
+                    <ul class="list-group">
+                        {% for libro in libros_mas_vendidos %}
+                            <li class="list-group-item">{{ libro.titulo }} - {{ libro.cantidad_disponible }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card bg-light mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Fechas Más Vendidas</h5>
+                    <ul class="list-group">
+                        {% for fecha in fechas_mas_vendidas %}
+                            <li class="list-group-item">{{ fecha.fecha_compra }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>

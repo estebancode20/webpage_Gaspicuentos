@@ -1,12 +1,15 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponse
-from .models import Libro, Carrito
+from .models import Libro, Carrito, Compra, DetalleCompra
 from .forms import ContactoForm, CustomUserCreationForm 
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from django.db.models import Avg
+from ventas import models
+
 
 
 
@@ -145,3 +148,20 @@ def ver_carrito(request):
 
 
 
+
+
+def dashboard(request):
+    # Lógica para calcular métricas
+    precio_compra_promedio = Libro.objects.aggregate(promedio_compra=Avg('precio_compra'))['promedio_compra']
+    precio_venta_promedio = Libro.objects.aggregate(promedio_venta=Avg('precio_venta'))['promedio_venta']
+
+    libros_mas_vendidos = Libro.objects.order_by('-cantidad_disponible')[:5]
+    fechas_mas_vendidas = Compra.objects.order_by('-fecha_compra')[:5]
+
+    context = {
+        'precio_compra_promedio': precio_compra_promedio,
+        'precio_venta_promedio': precio_venta_promedio,
+        'libros_mas_vendidos': libros_mas_vendidos,
+        'fechas_mas_vendidas': fechas_mas_vendidas,
+    }
+    return render(request, 'dashboard.html', context)

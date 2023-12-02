@@ -19,5 +19,6 @@ urlpatterns =[
     path('boleta', views_webpay.pagar_boleta),
     path('eliminar_del_carrito/<int:carrito_id>/', views.eliminar_del_carrito, name='eliminar_del_carrito'),
     path('generar_pdf/', views_webpay.generar_pdf, name='generar_pdf'),
+    path('dashboard/', views.dashboard, name='dashboard'),
 
 ]
